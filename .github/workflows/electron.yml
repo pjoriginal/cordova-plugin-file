@@ -66,8 +66,7 @@ jobs:
 
       - name: Run paramedic tests
         env:
-          test_config: 'electron.config.json'
           # Generally, this should automatically work for cordova-paramedic & plugins. If the path is unique, this can be manually changed.
           test_plugin_path: ${{ endswith(env.repo, '/cordova-paramedic') && './spec/testable-plugin/' || './' }}
           paramedic: ${{ endswith(env.repo, '/cordova-paramedic') && 'node main.js' || 'cordova-paramedic' }}
-        run: xvfb-run --auto-servernum ${{ env.paramedic }} --config ./pr/local/${{ env.test_config }} --plugin ${{ env.test_plugin_path }}
+        run: xvfb-run --auto-servernum ${{ env.paramedic }} --plugin ${{ env.test_plugin_path }} --platform electron
